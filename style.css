@@ -160,7 +160,7 @@ header {
 }
 
 #main-nav {
-  background: var(--clr-green);
+  background: var(--clr-green-dark);
   color: var(--clr-white);
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.24);
 }
@@ -186,8 +186,6 @@ header {
   height: 38px;
   width: auto;
   object-fit: contain;
-  /* Filtro para asegurarse que se ve bien sobre fondo verde.
-     Si el logo ya tiene colores propios, se puede quitar. */
 }
 
 /* ── Buscador ─────────────────────────────────────────── */
@@ -199,6 +197,7 @@ header {
   overflow: hidden;
   border: 2px solid rgba(255, 255, 255, 0.28);
   transition: border-color var(--transition), box-shadow var(--transition);
+  background-color: var(--clr-green-soft);
 }
 
 .nav-search:focus-within {
@@ -213,12 +212,12 @@ header {
   border: none;
   font-size: var(--text-sm);
   background: rgba(255, 255, 255, 0.13);
-  color: var(--clr-white);
+  color: var(--clr-dark);
   font-family: inherit;
 }
 
 #search-input::placeholder {
-  color: rgba(255, 255, 255, 0.58);
+  color: rgba(68, 68, 68, 0.789);
 }
 
 #search-input:focus {
