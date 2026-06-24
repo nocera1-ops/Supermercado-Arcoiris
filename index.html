@@ -3,32 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css">
-  <title>Supermercado Arcoiris — Tu mercado de confianza</title>
+  <link rel="stylesheet" href="">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <title>Supermercado Arcoiris Online</title>
 </head>
 <body>
       <script src="interface.js"></script>
-<!--NAV -->
+
+   <!-- ═══════════════════════════════ NAV ════════════════════════════════ -->
   <header>
     <nav id="main-nav" role="navigation" aria-label="Navegación principal">
       <div class="nav-inner">
+
         <a href="#" class="nav-logo" aria-label="Inicio — Supermercado Arcoiris">
-          🌈 Super<span>Arcoiris</span>
+          <img src="img/logo.png" alt="logo de Supermercado Arcoiris Premium">
         </a>
+
         <form class="nav-search" role="search" id="search-form">
-          <label for="search-input" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Buscar</label>
-          <input type="search" id="search-input" placeholder="Buscar productos..." autocomplete="off" aria-label="Buscar productos" />
-          <button type="submit" id="search-btn" aria-label="Realizar búsqueda">🔍</button>
+          <label for="search-input" class="sr-only">Buscar productos</label>
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Buscar productos..."
+            autocomplete="off"
+            aria-label="Buscar productos"
+          />
+          <button type="submit" id="search-btn" aria-label="Realizar búsqueda"> <img src="img/lupa.svg"></button>
         </form>
+
         <div class="nav-actions">
           <button id="cart-btn" aria-label="Abrir carrito">
-            🛒 <span class="cart-label">Carrito</span>
+            <img src="img/carrito.svg">
+
             <span id="cart-badge" aria-live="polite"></span>
           </button>
-          <button id="login-btn">Iniciar sesión</button>
+          <a href="login.html"> <button id="login-btn">Iniciar sesión</button> </a>
         </div>
+
       </div>
     </nav>
+
   </header>
 
   <!-- HERO -->
@@ -36,15 +50,52 @@
     <section id="hero" aria-labelledby="hero-title">
       <div class="hero-img-wrap">
         <img
-          src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=900&q=80"
+          src="img/main.jpg"
           alt="Interior luminoso del Supermercado Arcoiris con pasillos bien surtidos"
-          width="900" height="380" loading="eager"
+          loading="eager"
+        />
+      </div>
+      <div class="hero-text">
+        <h1 id="hero-title">Tu mercado<br /><span>de toda la vida.</span></h1>
+        <p>Desde <strong>1987</strong>, Supermercado Arcoiris es el lugar donde Santa Fe hace sus compras con confianza. Nacimos en el barrio y hoy somos <strong>12 sucursales</strong> en toda la provincia.</p>
+        <p>Trabajamos directamente con productores locales para traerte alimentos frescos, precios justos y la atención personalizada que merecés.</p>
+        <div class="hero-badges">
+          <span class="badge">🥦 Frescos a diario</span>
+          <span class="badge">🚚 Delivery gratis +$15.000</span>
+          <span class="badge">💳 Todos los medios de pago</span>
+          <span class="badge">🏠 12 sucursales</span>
+        </div>
+        <a href="#catalogo" class="hero-cta">Ver catálogo →</a>
+      </div>
+    </section>
+
+     <!-- ═══════════════════════════════
+       MAIN
+  ════════════════════════════════ -->
+  <main>
+
+    <!-- HERO -->
+    <section id="hero" aria-labelledby="hero-title">
+      <div class="hero-img-wrap">
+        <img
+          src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&q=80"
+          alt="Interior luminoso del Supermercado Arcoiris con pasillos bien surtidos"
+          width="1200"
+          height="480"
+          loading="eager"
         />
       </div>
       <div class="hero-text">
         <h1 id="hero-title">Tu mercado<br /><em>de toda la vida.</em></h1>
-        <p>Desde <strong>1987</strong>, Supermercado Arcoiris es el lugar donde Santa Fe hace sus compras con confianza. Nacimos en el barrio y hoy somos <strong>12 sucursales</strong> en toda la provincia.</p>
-        <p>Trabajamos directamente con productores locales para traerte alimentos frescos, precios justos y la atención personalizada que merecés.</p>
+        <p>
+          Desde <strong>1987</strong>, Supermercado Arcoiris es el lugar donde
+          Santa Fe hace sus compras con confianza. Nacimos en el barrio y hoy
+          somos <strong>12 sucursales</strong> en toda la provincia.
+        </p>
+        <p>
+          Trabajamos directamente con productores locales para traerte alimentos
+          frescos, precios justos y la atención personalizada que merecés.
+        </p>
         <div class="hero-badges">
           <span class="badge">🥦 Frescos a diario</span>
           <span class="badge">🚚 Delivery gratis +$15.000</span>
@@ -72,6 +123,187 @@
         <button id="show-more-btn">Ver más productos ↓</button>
       </div>
     </section>
+
+    <!-- Filtros generados dinámicamente por JS -->
+      <div id="category-filters" role="group" aria-label="Filtrar por categoría"></div>
+
+      <!-- Cards generadas dinámicamente por JS -->
+      <div id="products-grid" aria-live="polite">
+        <div id="no-results">
+          <div class="empty-icon">🔍</div>
+          <p>No encontramos productos para esa búsqueda.</p>
+        </div>
+      </div>
+
+      <div id="show-more-wrap">
+        <button id="show-more-btn">Ver más productos ↓</button>
+      </div>
+    </section>
+
+
+    <!-- CONTACTO -->
+    <section id="contacto" aria-labelledby="contacto-title">
+      <div class="contact-inner">
+        <h2 id="contacto-title">Contacto &amp; Atención al Cliente</h2>
+        <p>¿Tenés dudas, sugerencias o algún problema? Escribinos y te respondemos en menos de 24 horas.</p>
+
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-row">
+            <label>
+              Nombre completo
+              <input type="text" name="nombre" placeholder="Ej: María García" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="tu@email.com" required />
+            </label>
+          </div>
+          <label>
+            Teléfono (opcional)
+            <input type="tel" name="telefono" placeholder="+54 9 3401 123456" />
+          </label>
+          <label>
+            Motivo de consulta
+            <select name="motivo" required>
+              <option value="">Seleccioná un motivo…</option>
+              <option value="pedido">Estado de mi pedido</option>
+              <option value="producto">Consulta sobre un producto</option>
+              <option value="reclamo">Reclamo o devolución</option>
+              <option value="sugerencia">Sugerencia</option>
+              <option value="otro">Otro</option>
+            </select>
+          </label>
+          <label>
+            Mensaje
+            <textarea name="mensaje" placeholder="Escribí tu consulta acá…" required></textarea>
+          </label>
+          <button type="submit" id="contact-submit">Enviar mensaje</button>
+          <div id="form-success" role="alert">
+            ✅ ¡Mensaje enviado! Te responderemos a la brevedad.
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════
+       FOOTER
+  ════════════════════════════════ -->
+  <footer>
+    <div class="footer-grid">
+
+      <div class="footer-col">
+        <h4>🌈 Supermercado Arcoiris</h4>
+        <ul>
+          <li><a href="#hero">Quiénes somos</a></li>
+          <li><a href="#catalogo">Nuestro catálogo</a></li>
+          <li><a href="#contacto">Trabajá con nosotros</a></li>
+          <li><a href="#contacto">Sustentabilidad</a></li>
+          <li><a href="#contacto">Prensa</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>📞 Atención al Cliente</h4>
+        <ul>
+          <li><a href="#contacto">Formulario de contacto</a></li>
+          <li><a href="tel:08005551234">0800 555 ARCO</a></li>
+          <li><a href="mailto:hola@arcoiris.com.ar">hola@arcoiris.com.ar</a></li>
+          <li><a href="#contacto">Preguntas frecuentes</a></li>
+          <li><a href="#contacto">Libro de quejas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>🛒 Compras Online</h4>
+        <ul>
+          <li><a href="#contacto">Cómo comprar</a></li>
+          <li><a href="#contacto">Delivery a domicilio</a></li>
+          <li><a href="#contacto">Retiro en sucursal</a></li>
+          <li><a href="#contacto">Medios de pago</a></li>
+          <li><a href="#contacto">Seguir mi pedido</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>📱 Seguinos</h4>
+        <ul>
+          <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://wa.me/5493001234567" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://twitter.com" target="_blank" rel="noopener">X / Twitter</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Supermercado Arcoiris S.A. — Todos los derechos reservados.</span>
+      <span>
+        <a href="#contacto">Privacidad</a> ·
+        <a href="#contacto">Términos</a> ·
+        <a href="#contacto">Cookies</a>
+      </span>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════
+       CARRITO LATERAL
+  ════════════════════════════════ -->
+  <div id="cart-overlay" aria-hidden="true"></div>
+
+  <aside id="cart-panel" role="dialog" aria-modal="true" aria-label="Carrito de compras" aria-hidden="true">
+    <div class="cart-header">
+      <h2>🛒 Tu carrito</h2>
+      <button id="close-cart" aria-label="Cerrar carrito">✕</button>
+    </div>
+
+    <!-- Ítems generados por JS -->
+    <div id="cart-items"></div>
+
+    <div class="cart-summary">
+      <div class="discount-row">
+        <input
+          type="text"
+          id="discount-input"
+          placeholder="Código de descuento"
+          aria-label="Código de descuento"
+          maxlength="20"
+        />
+        <button id="apply-discount-btn">Aplicar</button>
+      </div>
+      <div id="discount-msg" aria-live="polite"></div>
+
+      <div class="summary-line">
+        <span>Subtotal</span>
+        <span id="subtotal-val">$0,00</span>
+      </div>
+      <div class="summary-line discount" id="discount-row" hidden>
+        <span id="discount-label">Descuento</span>
+        <span id="discount-val"></span>
+      </div>
+      <div class="summary-line">
+        <span>IVA (21%)</span>
+        <span id="tax-val">$0,00</span>
+      </div>
+      <div class="summary-line total">
+        <span>Total</span>
+        <span id="total-val">$0,00</span>
+      </div>
+
+      <button id="checkout-btn" disabled>Finalizar compra →</button>
+    </div>
+  </aside>
+
+
+  <!-- Toast de notificación -->
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
 
     <!-- FORMULARIO DE CONTACTO -->
     <section id="contacto" aria-labelledby="contacto-title">
