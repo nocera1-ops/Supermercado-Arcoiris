@@ -1,0 +1,51 @@
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <title>Formulario de contacto</title>
+</head>
+<body>
+    <section id="contacto" aria-labelledby="contacto-title">
+      <div class="contact-inner">
+        <h2 id="contacto-title">Contacto y atención al cliente</h2>
+        <p>¿Tenés dudas, sugerencias o algún problema? Escribinos y te respondemos en menos de 24 horas.</p>
+
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-row">
+            <label>
+              Nombre completo
+              <input type="text" name="nombre" placeholder="Ej: María García" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="tu@email.com" required />
+            </label>
+          </div>
+          <label>
+            Teléfono (opcional)
+            <input type="tel" name="telefono" placeholder="+54 9 3401 123456" />
+          </label>
+          <label>
+            Motivo de consulta
+            <select name="motivo" required>
+              <option value="">Seleccioná un motivo…</option>
+              <option value="producto">Consulta sobre un producto</option>
+              <option value="reclamo">Reclamo o devolución</option>
+              <option value="sugerencia">Sugerencia</option>
+              <option value="otro">Otro</option>
+            </select>
+          </label>
+          <label>
+            Mensaje
+            <textarea name="mensaje" placeholder="Escribí tu consulta acá…" required></textarea>
+          </label>
+          <button type="submit" id="contact-submit">Enviar</button>
+          <div id="form-success" role="alert">
+            ✅ ¡Correo enviado! Te responderemos a la brevedad.
+          </div>
+        </form>
+      </div>
+    </section>
