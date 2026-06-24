@@ -1,29 +1,29 @@
   /* ── 1. DATOS ─────────────────────────────────────────────── */
   const PRODUCTS = [
-    { id:1,  name:'Manzanas Rojas',      category:'Frutas y Verduras', emoji:'🍎', price:890,  desc:'Cosechadas en el Alto Valle de Río Negro. Dulces, crujientes, perfectas para comer o usar en postres.' },
+    { id:1,  name:'Manzanas Rojas',      category:'Frutas y Verduras', emoji:'🍎', price:890,  desc: 'Dulces, crujientes, perfectas para comer o usar en postres.' },
     { id:2,  name:'Tomates Perita',      category:'Frutas y Verduras', emoji:'🍅', price:1200, desc:'Color intenso y sabor concentrado. Ideales para salsas caseras, ensaladas y guisos.' },
-    { id:3,  name:'Bananas',             category:'Frutas y Verduras', emoji:'🍌', price:750,  desc:'En su punto justo de maduración. Ricas en potasio y energía natural para arrancar el día.' },
-    { id:4,  name:'Espinaca',            category:'Frutas y Verduras', emoji:'🥬', price:650,  desc:'Fresca de huerta local. Ideal para tartas, tortillas y ensaladas. Cosecha del día.' },
-    { id:5,  name:'Naranjas Jugo',       category:'Frutas y Verduras', emoji:'🍊', price:980,  desc:'Jugosas y ricas en vitamina C. Perfectas para jugo natural. Procedencia: Entre Ríos.' },
-    { id:6,  name:'Lechuga Mantecosa',   category:'Frutas y Verduras', emoji:'🥗', price:500,  desc:'Tierna y fresca, perfecta para ensaladas y hamburguesas. Entregada directo del productor.' },
-    { id:7,  name:'Pimiento Rojo',       category:'Frutas y Verduras', emoji:'🫑', price:1100, desc:'Carnosos y brillantes para salteados, asados o rellenos. Cultivo sin agroquímicos.' },
-    { id:8,  name:'Leche Entera',        category:'Lácteos',           emoji:'🥛', price:1350, desc:'Leche pasteurizada, fuente natural de calcio y proteínas. Sachet de 1 litro.' },
-    { id:9,  name:'Queso Cremoso',       category:'Lácteos',           emoji:'🧀', price:2800, desc:'Pasta blanda ideal para untar. Textura suave y sabor equilibrado. Horma de 400 g.' },
-    { id:10, name:'Yogur Natural',        category:'Lácteos',           emoji:'🫙', price:950,  desc:'Descremado, sin azúcar añadida. Alto en proteínas. Pote de 190 g.' },
-    { id:11, name:'Manteca',             category:'Lácteos',           emoji:'🧈', price:1900, desc:'Elaborada con crema de leche entera. Ideal para cocinar y repostería. 200 g.' },
+    { id:3,  name:'Bananas',             category:'Frutas y Verduras', emoji:'🍌', price:750,  desc:'Ricas en potasio y energía natural para arrancar el día.' },
+    { id:4,  name:'Espinaca',            category:'Frutas y Verduras', emoji:'🥬', price:650,  desc:'Ideal para tartas, tortillas y ensaladas.' },
+    { id:5,  name:'Naranjas Jugo',       category:'Frutas y Verduras', emoji:'🍊', price:980,  desc:'Jugosas y ricas en vitamina C. Perfectas para jugo natural.' },
+    { id:6,  name:'Lechuga Mantecosa',   category:'Frutas y Verduras', emoji:'🥗', price:500,  desc:'Tierna y fresca, perfecta para ensaladas y hamburguesas.' },
+    { id:7,  name:'Pimiento Rojo',       category:'Frutas y Verduras', emoji:'🫑', price:1100, desc:'Carnosos y brillantes para salteados, asados o rellenos.' },
+    { id:8,  name:'Leche Entera',        category:'Lácteos',           emoji:'🥛', price:1350, desc:'Leche pasteurizada. Sachet de 1 litro.' },
+    { id:9,  name:'Queso Cremoso',       category:'Lácteos',           emoji:'🧀', price:2800, desc:'Pasta blanda ideal para untar. Horma de 400 g.' },
+    { id:10, name:'Yogur Natural',        category:'Lácteos',           emoji:'🫙', price:950,  desc:'Descremado, sin azúcar añadida. Pote de 190 g.' },
+    { id:11, name:'Manteca',             category:'Lácteos',           emoji:'🧈', price:1900, desc:'Elaborada con crema de leche entera. 200 g.' },
     { id:12, name:'Crema de Leche',      category:'Lácteos',           emoji:'🍶', price:1100, desc:'35% de materia grasa. Perfecta para salsas y rellenos. Caja de 200 ml.' },
     { id:13, name:'Asado de Tira',       category:'Carnes',            emoji:'🥩', price:6500, desc:'Corte tradicional argentino para parrilla. Novillo Aberdeen Angus. Precio por kg.' },
-    { id:14, name:'Pechuga de Pollo',    category:'Carnes',            emoji:'🍗', price:4200, desc:'Sin hueso ni piel. Ideal para milanesas, al horno o a la plancha. Frescos a diario.' },
-    { id:15, name:'Carne Molida',        category:'Carnes',            emoji:'🫙', price:4800, desc:'Molida especial con 20% de grasa. Perfecta para empanadas, hamburguesas y bolognesa.' },
-    { id:16, name:'Bondiola de Cerdo',   category:'Carnes',            emoji:'🐷', price:5900, desc:'Corte magro y jugoso. Excelente al horno con papas o a la parrilla. Precio por kg.' },
-    { id:17, name:'Pan Lactal',          category:'Panadería',         emoji:'🍞', price:1650, desc:'Suave y esponjoso, ideal para sándwiches y tostadas. Sin conservantes artificiales. 460 g.' },
-    { id:18, name:'Medialunas',          category:'Panadería',         emoji:'🥐', price:350,  desc:'Artesanales con manteca real. Hojaldradas y doradas. Horneadas a la mañana. Por unidad.' },
-    { id:19, name:'Pan Integral',        category:'Panadería',         emoji:'🫓', price:2100, desc:'Con semillas de girasol, sésamo y lino. Alto en fibra. Horneado diario. 500 g.' },
-    { id:20, name:'Facturas Surtidas',   category:'Panadería',         emoji:'🧁', price:1800, desc:'Vigilantes, palmeritas y cañoncitos de dulce de leche. Docena de panadería fresca.' },
-    { id:21, name:'Detergente',          category:'Limpieza',          emoji:'🧴', price:1200, desc:'Líquido concentrado para vajilla. Fórmula desengrasante con aloe. 750 ml.' },
-    { id:22, name:'Lavandina',           category:'Limpieza',          emoji:'🫧', price:980,  desc:'Concentrada al 55 g/l. Desinfecta, blanquea y elimina olores. Botella de 1 litro.' },
+    { id:14, name:'Pechuga de Pollo',    category:'Carnes',            emoji:'🍗', price:4200, desc:'Sin hueso ni piel. Ideal para milanesas, al horno o a la plancha.' },
+    { id:15, name:'Carne Molida',        category:'Carnes',            emoji:'🫙', price:4800, desc:'Molida especial con 20% de grasa.' },
+    { id:16, name:'Bondiola de Cerdo',   category:'Carnes',            emoji:'🐷', price:5900, desc:'Corte magro y jugoso. Precio por kg.' },
+    { id:17, name:'Pan Lactal',          category:'Panadería',         emoji:'🍞', price:1650, desc:'Sin conservantes artificiales. 460 g.' },
+    { id:18, name:'Medialunas',          category:'Panadería',         emoji:'🥐', price:350,  desc:'Horneadas a la mañana. Por unidad.' },
+    { id:19, name:'Pan Integral',        category:'Panadería',         emoji:'🫓', price:2100, desc:'Con semillas de girasol, sésamo y lino. Horneado diario. 500 g.' },
+    { id:20, name:'Facturas Surtidas',   category:'Panadería',         emoji:'🧁', price:1800, desc:'Vigilantes, palmeritas y cañoncitos de dulce de leche.' },
+    { id:21, name:'Detergente',          category:'Limpieza',          emoji:'🧴', price:1200, desc:'Fórmula desengrasante con aloe. 750 ml.' },
+    { id:22, name:'Lavandina',           category:'Limpieza',          emoji:'🫧', price:980,  desc:'Concentrada al 55 g/l. Botella de 1 litro.' },
     { id:23, name:'Jabón en Polvo',      category:'Limpieza',          emoji:'🧺', price:3400, desc:'Para ropa blanca y de color. Con tecnología STAIN GUARD. Bolsa de 800 g.' },
-    { id:24, name:'Suavizante de Telas', category:'Limpieza',          emoji:'👕', price:2600, desc:'Fragancia floral duradera. Deja la ropa suave y con olor fresco todo el día. 900 ml.' },
+    { id:24, name:'Suavizante de Telas', category:'Limpieza',          emoji:'👕', price:2600, desc:'Fragancia floral duradera. 900 ml.' },
     { id:25, name:'Limpiavidrios',       category:'Limpieza',          emoji:'🪟', price:1850, desc:'Limpia vidrios y superficies sin dejar rastros. Fórmula con alcohol. Gatillo 500 ml.' },
   ];
 
@@ -298,7 +298,7 @@
 
   /* ── 9. CHECKOUT ──────────────────────────────────────────── */
   function checkout() {
-    showToast('🎉 ¡Pedido enviado! Gracias por comprar en Arcoiris.');
+    showToast('¡Pedido enviado!');
     state.cart         = [];
     state.discountCode = null;
     state.discountPct  = 0;
