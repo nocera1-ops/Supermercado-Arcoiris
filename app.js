@@ -1,6 +1,6 @@
   /* ── 1. DATOS ─────────────────────────────────────────────── */
   const PRODUCTS = [
-    { id:1,  name:'Manzanas Rojas',      category:'Frutas y Verduras', emoji:'🍎', price:890,  desc: 'Dulces, crujientes, perfectas para comer o usar en postres.' },
+    { id:1,  name:'Manzanas Rojas',      category:'Frutas y Verduras', url: "img/manzanas.jpg", price:890,  desc: 'Dulces, crujientes, perfectas para comer o usar en postres.' },
     { id:2,  name:'Tomates Perita',      category:'Frutas y Verduras', emoji:'🍅', price:1200, desc:'Color intenso y sabor concentrado. Ideales para salsas caseras, ensaladas y guisos.' },
     { id:3,  name:'Bananas',             category:'Frutas y Verduras', emoji:'🍌', price:750,  desc:'Ricas en potasio y energía natural para arrancar el día.' },
     { id:4,  name:'Espinaca',            category:'Frutas y Verduras', emoji:'🥬', price:650,  desc:'Ideal para tartas, tortillas y ensaladas.' },
@@ -14,7 +14,7 @@
     { id:12, name:'Crema de Leche',      category:'Lácteos',           emoji:'🍶', price:1100, desc:'35% de materia grasa. Perfecta para salsas y rellenos. Caja de 200 ml.' },
     { id:13, name:'Asado de Tira',       category:'Carnes',            emoji:'🥩', price:6500, desc:'Corte tradicional argentino para parrilla. Novillo Aberdeen Angus. Precio por kg.' },
     { id:14, name:'Pechuga de Pollo',    category:'Carnes',            emoji:'🍗', price:4200, desc:'Sin hueso ni piel. Ideal para milanesas, al horno o a la plancha.' },
-    { id:15, name:'Carne Molida',        category:'Carnes',            emoji:'🫙', price:4800, desc:'Molida especial con 20% de grasa.' },
+    { id:15, name:'Carne Picada',        category:'Carnes',            emoji:'🫙', price:4800, desc:'Molida especial con 20% de grasa.' },
     { id:16, name:'Bondiola de Cerdo',   category:'Carnes',            emoji:'🐷', price:5900, desc:'Corte magro y jugoso. Precio por kg.' },
     { id:17, name:'Pan Lactal',          category:'Panadería',         emoji:'🍞', price:1650, desc:'Sin conservantes artificiales. 460 g.' },
     { id:18, name:'Medialunas',          category:'Panadería',         emoji:'🥐', price:350,  desc:'Horneadas a la mañana. Por unidad.' },
@@ -373,8 +373,4 @@
       setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 5000);
     });
 
-    // Login demo
-    document.getElementById('login-btn').addEventListener('click', () => {
-      showToast('🔐 Login próximamente disponible.');
-    });
   });

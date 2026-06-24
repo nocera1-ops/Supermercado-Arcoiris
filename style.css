@@ -1,4 +1,6 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+    
     /* ── RESET & BASE ─────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -14,7 +16,7 @@
       --radius:  10px;
       --shadow:  0 2px 12px rgba(0,0,0,.10);
       --font-display: 'Georgia', serif;
-      --font-body:    'Segoe UI', system-ui, sans-serif;
+      --font-body:   "Manrope", sans-serif;
       --transition:   .2s ease;
     }
     html { scroll-behavior: smooth; }
