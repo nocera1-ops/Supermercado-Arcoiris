@@ -28,27 +28,27 @@
   --clr-border:       #d4e0d6;
   --clr-border-light: #eaf2eb;
 
-  /* ── Footer ────────────────────────────────────────────── */
+  /* ── Footer ─────────────────────────────────────────────── */
   --clr-footer-bg:   #111d12;
   --clr-footer-text: #8aab8c;
   --clr-footer-link: #8aab8c;
   --clr-footer-mute: #566d58;
   --clr-footer-rule: #1f3321;
 
-  /* ── Tipografía ─────────────────────────────────────────── */
+  /* ── Tipografía ──────────────────────────────────────────── */
   --font-display: 'Georgia', 'Times New Roman', serif;
-  --font-body:    'Manrope', sans-serif;
+  --font-body:    'Segoe UI', system-ui, -apple-system, sans-serif;
 
-  /* ── Escala tipográfica (base mobile) ───────────────────── */
-  --text-xs:   0.70rem;   /*  11.2px */
-  --text-sm:   0.85rem;   /*  13.6px */
-  --text-base: 1rem;      /*  16px   */
-  --text-lg:   1.15rem;   /*  18.4px */
-  --text-xl:   1.35rem;   /*  21.6px */
-  --text-2xl:  1.65rem;   /*  26.4px */
-  --text-3xl:  2.1rem;    /*  33.6px */
+  /* ── Escala tipográfica (base mobile) ────────────────────── */
+  --text-xs:   0.70rem;
+  --text-sm:   0.85rem;
+  --text-base: 1rem;
+  --text-lg:   1.15rem;
+  --text-xl:   1.35rem;
+  --text-2xl:  1.65rem;
+  --text-3xl:  2.1rem;
 
-  /* ── Espaciado ──────────────────────────────────────────── */
+  /* ── Espaciado ───────────────────────────────────────────── */
   --sp-1:  0.25rem;
   --sp-2:  0.5rem;
   --sp-3:  0.75rem;
@@ -60,7 +60,7 @@
   --sp-12: 3rem;
   --sp-16: 4rem;
 
-  /* ── Formas ─────────────────────────────────────────────── */
+  /* ── Formas ──────────────────────────────────────────────── */
   --radius-sm:   6px;
   --radius:      10px;
   --radius-lg:   16px;
@@ -76,7 +76,11 @@
   /* ── Misc ────────────────────────────────────────────────── */
   --transition: 0.2s ease;
   --max-w:      1200px;
-  --nav-h:      58px;
+  --nav-h:      62px;
+
+  /* ── Tamaños de íconos SVG del nav ──────────────────────── */
+  --icon-nav-sm: 20px;   /* lupa */
+  --icon-nav-md: 26px;   /* carrito e inicio sesión */
 }
 
 
@@ -129,7 +133,6 @@ button {
   outline: none;
 }
 
-/* Ocultar visualmente sin quitar del árbol de accesibilidad */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -142,7 +145,6 @@ button {
   border: 0;
 }
 
-/* Focus ring accesible y moderno */
 :focus-visible {
   outline: 3px solid var(--clr-yellow);
   outline-offset: 3px;
@@ -160,165 +162,217 @@ header {
 }
 
 #main-nav {
-  background: var(--clr-green-dark);
+  background: var(--clr-green);
   color: var(--clr-white);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.24);
+  /* Sombra pronunciada + línea inferior sutil */
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.28);
 }
 
+/*
+  nav-inner: el logo va pegado al borde izquierdo del contenedor
+  (sin padding izquierdo extra). El max-width centra el conjunto,
+  pero el logo queda visualmente en el extremo izquierdo.
+*/
 .nav-inner {
   max-width: var(--max-w);
   margin: 0 auto;
+  /* padding-left mínimo para que el logo no toque el borde de pantalla */
   padding: 0 var(--sp-4);
   height: var(--nav-h);
   display: flex;
   align-items: center;
+  /* gap solo entre buscador y acciones; el logo no necesita gap derecho grande */
   gap: var(--sp-3);
 }
 
-/* ── Logo con imagen ──────────────────────────────────── */
+/* ── Logo ────────────────────────────────────────────── */
 .nav-logo {
+  /* Sin margin-right extra: queda pegado al inicio del flex */
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  /* Pequeño margen negativo para compensar el padding del contenedor
+     y acercar el logo al borde real de la pantalla */
+  margin-left: calc(-1 * var(--sp-1));
 }
 
 .nav-logo img {
-  height: 38px;
+  height: 40px;
   width: auto;
   object-fit: contain;
+  /* Invertir a blanco sobre fondo verde.
+     Si el logo ya tiene color propio sobre fondo transparente, quitá esta línea. */
+  filter: brightness(0) invert(1);
+  /* Transición suave al hover */
+  transition: opacity var(--transition);
 }
 
-/* ── Buscador ─────────────────────────────────────────── */
+.nav-logo:hover img {
+  opacity: 0.85;
+}
+
+/* ── Buscador ────────────────────────────────────────── */
 .nav-search {
   flex: 1;
   display: flex;
-  max-width: 460px;
+  /* Limitar ancho máximo para no ocupar todo el espacio */
+  max-width: 480px;
   border-radius: var(--radius-sm);
   overflow: hidden;
-  border: 2px solid rgba(255, 255, 255, 0.28);
+  border: 1.5px solid rgba(255, 255, 255, 0.30);
+  background: rgba(255, 255, 255, 0.10);
   transition: border-color var(--transition), box-shadow var(--transition);
-  background-color: var(--clr-green-soft);
 }
 
 .nav-search:focus-within {
   border-color: var(--clr-yellow);
-  box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.25);
+  box-shadow: 0 0 0 3px rgba(245, 197, 24, 0.22);
+  background: rgba(255, 255, 255, 0.14);
 }
 
 #search-input {
   flex: 1;
   min-width: 0;
-  padding: 0.42rem 0.75rem;
+  padding: 0.45rem 0.8rem;
   border: none;
   font-size: var(--text-sm);
-  background: rgba(255, 255, 255, 0.13);
-  color: var(--clr-dark);
+  background: transparent;
+  color: var(--clr-white);
   font-family: inherit;
 }
 
 #search-input::placeholder {
-  color: rgba(68, 68, 68, 0.789);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 #search-input:focus {
   outline: none;
-  background: rgba(255, 255, 255, 0.20);
 }
 
-/* Eliminar el botón nativo de limpiar en WebKit */
 #search-input::-webkit-search-cancel-button {
   -webkit-appearance: none;
 }
 
+/* Botón lupa */
 #search-btn {
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 0.85rem;
-  background: rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.10);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
   transition: background var(--transition);
 }
 
 #search-btn img {
-  width: 18px;
-  height: 18px;
-  /* Ícono SVG oscuro → blanco sobre fondo verde */
+  width: var(--icon-nav-sm);
+  height: var(--icon-nav-sm);
   filter: brightness(0) invert(1);
+  flex-shrink: 0;
 }
 
 #search-btn:hover {
-  background: rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.22);
 }
 
-/* ── Acciones (carrito + login) ───────────────────────── */
+/* ── Acciones del nav ────────────────────────────────── */
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: var(--sp-2);
+  gap: var(--sp-1);   /* gap reducido: los botones ya tienen su padding */
   margin-left: auto;
+  /* Posición relativa para que el badge pueda ser absoluto al wrapper */
+  position: relative;
 }
 
-/* Botón carrito */
+/* Estilo base compartido para botones icónicos del nav */
+#login-btn,
 #cart-btn {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.13);
+  background: rgba(255, 255, 255, 0.10);
   border-radius: var(--radius-sm);
-  padding: 0.42rem 0.7rem;
-  transition: background var(--transition);
+  padding: 0.45rem 0.6rem;
+  transition: background var(--transition), transform var(--transition);
 }
 
-#cart-btn img {
-  width: 24px;
-  height: 24px;
-  filter: brightness(0) invert(1);
-}
-
+#login-btn:hover,
 #cart-btn:hover {
-  background: rgba(255, 255, 255, 0.26);
+  background: rgba(255, 255, 255, 0.22);
+  transform: translateY(-1px);
 }
 
-/* Badge numérico del carrito */
+/* Ícono de inicio de sesión */
+#login-btn img {
+  width: var(--icon-nav-md);
+  height: var(--icon-nav-md);
+  filter: brightness(0) invert(1);
+  flex-shrink: 0;
+}
+
+/* Ícono de carrito */
+#cart-btn img {
+  width: var(--icon-nav-md);
+  height: var(--icon-nav-md);
+  filter: brightness(0) invert(1);
+  flex-shrink: 0;
+}
+
+/*
+  Badge del carrito.
+  En el nuevo HTML el <span id="cart-badge"> es HERMANO del #cart-btn
+  (no hijo), así que no puede ser position:absolute dentro del botón.
+  Lo posicionamos relativo al wrapper .nav-actions con un offset negativo.
+*/
 #cart-badge {
+  /* Sacar del flujo para solapar con el ícono */
   position: absolute;
-  top: -6px;
-  right: -6px;
+  /* Alineado sobre el ícono del carrito (último elemento de .nav-actions) */
+  top: 2px;
+  right: 2px;
+  /* Apariencia */
   background: var(--clr-yellow);
   color: var(--clr-dark);
   border-radius: 50%;
-  width: 19px;
-  height: 19px;
-  font-size: 0.62rem;
+  width: 18px;
+  height: 18px;
+  font-size: 0.60rem;
   font-weight: 800;
+  line-height: 1;
+  border: 2px solid var(--clr-green);
+  /* Oculto por defecto; JS agrega .visible */
   display: none;
   align-items: center;
   justify-content: center;
-  line-height: 1;
-  border: 2px solid var(--clr-green);
+  /* Que quede por encima de los botones */
+  z-index: 1;
+  pointer-events: none;
 }
 
 #cart-badge.visible {
   display: flex;
 }
 
-/* Botón iniciar sesión */
-#login-btn {
-  background: var(--clr-yellow);
-  color: var(--clr-dark);
-  font-weight: 700;
-  font-size: var(--text-sm);
-  padding: 0.42rem 0.9rem;
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-  transition: background var(--transition), transform var(--transition);
+/* Separador vertical entre login y carrito */
+.nav-actions a + button,
+.nav-actions button + button {
+  position: relative;
 }
 
-#login-btn:hover {
-  background: var(--clr-yellow-dark);
-  transform: translateY(-1px);
+.nav-actions a + button::before,
+.nav-actions button + button::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--sp-1) - 0.5px);
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.20);
 }
 
 
@@ -334,7 +388,6 @@ header {
   gap: var(--sp-6);
 }
 
-/* Imagen */
 .hero-img-wrap {
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -344,17 +397,17 @@ header {
 
 .hero-img-wrap img {
   width: 100%;
-  height: 230px;
+  height: 240px;
   object-fit: cover;
   object-position: center 60%;
-  transition: transform 0.4s ease;
+  transition: transform 0.5s ease;
 }
 
 .hero-img-wrap:hover img {
-  transform: scale(1.02);
+  transform: scale(1.025);
 }
 
-/* Texto */
+/* Texto hero */
 .hero-text h1 {
   font-family: var(--font-display);
   font-size: var(--text-2xl);
@@ -363,11 +416,11 @@ header {
   margin-bottom: var(--sp-4);
 }
 
-/* El <span> dentro del h1 */
 .hero-text h1 span {
   display: block;
   color: var(--clr-dark);
   font-size: 0.88em;
+  margin-top: var(--sp-1);
 }
 
 .hero-text p {
@@ -381,7 +434,7 @@ header {
   display: flex;
   flex-wrap: wrap;
   gap: var(--sp-2);
-  margin-top: var(--sp-2);
+  margin-top: var(--sp-3);
 }
 
 .badge {
@@ -389,13 +442,12 @@ header {
   color: var(--clr-green-dark);
   border: 1px solid var(--clr-green-border);
   border-radius: var(--radius-pill);
-  padding: 0.28rem 0.75rem;
+  padding: 0.28rem 0.8rem;
   font-size: var(--text-xs);
   font-weight: 700;
   white-space: nowrap;
 }
 
-/* CTA opcional (por si se agrega en el futuro) */
 .hero-cta {
   display: inline-block;
   margin-top: var(--sp-5);
@@ -423,7 +475,6 @@ header {
   padding: 0 var(--sp-4);
 }
 
-/* Encabezado de sección */
 .section-header {
   margin-bottom: var(--sp-5);
   padding-bottom: var(--sp-4);
@@ -443,13 +494,12 @@ header {
   margin-top: var(--sp-1);
 }
 
-/* ── Filtros de categoría ─────────────────────────────── */
+/* ── Filtros ─────────────────────────────────────────── */
 #category-filters {
   display: flex;
   flex-wrap: wrap;
   gap: var(--sp-2);
   margin-bottom: var(--sp-6);
-  /* scroll horizontal en mobile para que no se rompa en pantallas chicas */
   overflow-x: auto;
   padding-bottom: var(--sp-1);
   -webkit-overflow-scrolling: touch;
@@ -462,7 +512,7 @@ header {
 
 .filter-btn {
   flex-shrink: 0;
-  padding: 0.4rem 1.05rem;
+  padding: 0.40rem 1.05rem;
   border-radius: var(--radius-pill);
   font-size: var(--text-sm);
   font-weight: 600;
@@ -486,18 +536,16 @@ header {
   background: var(--clr-green);
   color: var(--clr-white);
   border-color: var(--clr-green);
-  box-shadow: 0 2px 8px rgba(45, 122, 58, 0.30);
+  box-shadow: 0 2px 8px rgba(45, 122, 58, 0.28);
 }
 
-/* ── Grid de productos ────────────────────────────────── */
+/* ── Grid de productos ───────────────────────────────── */
 #products-grid {
   display: grid;
-  /* Mobile: 2 columnas compactas */
   grid-template-columns: repeat(2, 1fr);
   gap: var(--sp-3);
 }
 
-/* Sin resultados */
 #no-results {
   display: none;
   grid-column: 1 / -1;
@@ -512,37 +560,37 @@ header {
   margin-bottom: var(--sp-3);
 }
 
-/* ── Card de producto ─────────────────────────────────── */
+/* ── Card de producto ────────────────────────────────── */
 .product-card {
   background: var(--clr-white);
   border-radius: var(--radius);
-  box-shadow: var(--shadow-sm);
+  /* Sombra más pronunciada = más profundidad */
+  box-shadow: var(--shadow);
   border: 1px solid var(--clr-border);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   transition:
-    transform var(--transition),
-    box-shadow var(--transition);
+    transform 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
 }
 
-/* Área del emoji / ícono */
 .card-emoji {
-  background: linear-gradient(135deg, var(--clr-green-soft) 0%, #d4edda 100%);
-  font-size: 2.6rem;
+  /* Degradado suave de fondo */
+  background: linear-gradient(150deg, var(--clr-green-soft) 0%, #d6edda 100%);
+  font-size: 2.8rem;
   text-align: center;
-  padding: var(--sp-4) 0 var(--sp-3);
+  padding: var(--sp-5) 0 var(--sp-4);
   line-height: 1;
 }
 
-/* Cuerpo de la card */
 .card-body {
-  padding: var(--sp-3) var(--sp-3) var(--sp-4);
+  padding: var(--sp-4);
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -558,7 +606,7 @@ header {
 }
 
 .card-name {
-  font-size: 0.92rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--clr-dark);
   margin-bottom: var(--sp-2);
@@ -574,7 +622,7 @@ header {
 }
 
 .card-price {
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: var(--clr-green);
   margin-bottom: var(--sp-3);
@@ -583,7 +631,7 @@ header {
 
 .card-add-btn {
   width: 100%;
-  padding: 0.52rem;
+  padding: 0.55rem;
   background: var(--clr-green);
   color: var(--clr-white);
   border-radius: var(--radius-sm);
@@ -608,7 +656,7 @@ header {
   background: var(--clr-yellow-dark);
 }
 
-/* ── Botón "ver más" ──────────────────────────────────── */
+/* ── Ver más ─────────────────────────────────────────── */
 #show-more-wrap {
   text-align: center;
   margin-top: var(--sp-8);
@@ -619,7 +667,7 @@ header {
   border: 2px solid var(--clr-green);
   color: var(--clr-green);
   font-weight: 700;
-  padding: 0.65rem 2rem;
+  padding: 0.65rem 2.2rem;
   border-radius: var(--radius-sm);
   font-size: var(--text-sm);
   transition:
@@ -638,8 +686,6 @@ header {
 /* ══════════════════════════════════════════════════════════
    6. CARRITO LATERAL (drawer)
 ══════════════════════════════════════════════════════════ */
-
-/* Overlay oscuro */
 #cart-overlay {
   display: none;
   position: fixed;
@@ -654,7 +700,6 @@ header {
   display: block;
 }
 
-/* Panel lateral */
 #cart-panel {
   position: fixed;
   top: 0;
@@ -663,7 +708,7 @@ header {
   height: 100%;
   background: var(--clr-white);
   z-index: 2001;
-  box-shadow: -6px 0 32px rgba(0, 0, 0, 0.20);
+  box-shadow: -6px 0 36px rgba(0, 0, 0, 0.20);
   display: flex;
   flex-direction: column;
   transition: right 0.32s cubic-bezier(0.4, 0, 0.2, 1);
@@ -673,7 +718,6 @@ header {
   right: 0;
 }
 
-/* Header del carrito */
 .cart-header {
   flex-shrink: 0;
   padding: var(--sp-4) var(--sp-5);
@@ -704,7 +748,6 @@ header {
   background: rgba(255, 255, 255, 0.22);
 }
 
-/* Lista de ítems */
 #cart-items {
   flex: 1;
   overflow-y: auto;
@@ -715,7 +758,6 @@ header {
   overscroll-behavior: contain;
 }
 
-/* Estado vacío */
 .cart-empty {
   text-align: center;
   padding: var(--sp-12) var(--sp-4);
@@ -727,7 +769,6 @@ header {
   margin-bottom: var(--sp-3);
 }
 
-/* Ítem individual */
 .cart-item {
   display: flex;
   align-items: flex-start;
@@ -765,7 +806,6 @@ header {
   margin-top: 2px;
 }
 
-/* Controles de cantidad */
 .ci-qty {
   display: flex;
   align-items: center;
@@ -790,7 +830,7 @@ header {
 
 .qty-btn:hover {
   background: var(--clr-green-dark);
-  transform: scale(1.08);
+  transform: scale(1.10);
 }
 
 .qty-val {
@@ -824,7 +864,7 @@ header {
   background: #fde8e8;
 }
 
-/* ── Resumen / totales ────────────────────────────────── */
+/* Resumen */
 .cart-summary {
   flex-shrink: 0;
   padding: var(--sp-4);
@@ -832,7 +872,6 @@ header {
   background: var(--clr-light);
 }
 
-/* Campo de descuento */
 .discount-row {
   display: flex;
   gap: var(--sp-2);
@@ -885,7 +924,6 @@ header {
   cursor: not-allowed;
 }
 
-/* Mensaje de feedback del descuento */
 #discount-msg {
   font-size: var(--text-xs);
   font-weight: 600;
@@ -896,7 +934,6 @@ header {
 #discount-msg.ok  { color: #1a7a2a; }
 #discount-msg.err { color: var(--clr-red); }
 
-/* Líneas de resumen */
 .summary-line {
   display: flex;
   justify-content: space-between;
@@ -921,7 +958,6 @@ header {
   margin-bottom: 0;
 }
 
-/* Botón finalizar compra */
 #checkout-btn {
   width: 100%;
   margin-top: var(--sp-4);
@@ -959,7 +995,6 @@ footer {
   max-width: var(--max-w);
   margin: 0 auto var(--sp-8);
   display: grid;
-  /* Mobile: 2 columnas */
   grid-template-columns: 1fr 1fr;
   gap: var(--sp-8) var(--sp-6);
 }
@@ -971,6 +1006,9 @@ footer {
   letter-spacing: 0.10em;
   color: var(--clr-white);
   margin-bottom: var(--sp-4);
+  /* Línea decorativa debajo del título */
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer-col ul {
@@ -979,11 +1017,32 @@ footer {
   gap: var(--sp-3);
 }
 
-/* Texto plano y links dentro del footer */
+/*
+  Los <li> del footer ahora pueden tener <img> + <a> en línea.
+  Los alineamos con flexbox para que el ícono y el texto queden
+  al mismo nivel vertical.
+*/
 .footer-col li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
   font-size: var(--text-sm);
   color: var(--clr-footer-text);
   line-height: 1.5;
+}
+
+/* Íconos SVG dentro de los li del footer */
+.footer-col li img {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  /* SVG oscuro → tono suave acorde al footer */
+  filter: brightness(0) invert(1) opacity(0.55);
+  transition: filter var(--transition);
+}
+
+.footer-col li:hover img {
+  filter: brightness(0) invert(1) opacity(0.85);
 }
 
 .footer-col a {
@@ -1051,21 +1110,18 @@ footer {
 
 /* ════════════════════════════════════════════════════════════
    BREAKPOINTS — mobile-first
-   base → mobile angosto (< 480px)
-   sm   → 480px  teléfonos grandes
-   md   → 768px  tablets
-   lg   → 1024px desktops
-   xl   → 1200px pantallas anchas
 ════════════════════════════════════════════════════════════ */
 
 /* ── sm: 480px ────────────────────────────────────────── */
 @media (min-width: 480px) {
   :root {
-    --nav-h: 62px;
+    --nav-h: 66px;
+    --icon-nav-sm: 20px;
+    --icon-nav-md: 28px;
   }
 
   .nav-logo img {
-    height: 42px;
+    height: 44px;
   }
 
   #products-grid {
@@ -1074,28 +1130,35 @@ footer {
 
   .card-emoji {
     font-size: 3rem;
-    padding: var(--sp-5) 0 var(--sp-4);
   }
 }
 
 /* ── md: 768px ────────────────────────────────────────── */
 @media (min-width: 768px) {
   :root {
-    --nav-h: 68px;
+    --nav-h: 70px;
+    --icon-nav-sm: 22px;
+    --icon-nav-md: 28px;
     --text-2xl: 1.9rem;
     --text-3xl: 2.5rem;
   }
 
-  /* Nav */
-  .nav-logo img {
-    height: 46px;
-  }
-
   .nav-inner {
-    gap: var(--sp-4);
+    gap: var(--sp-5);
+    /* En pantallas grandes el logo puede tener un poco más de espacio */
+    padding: 0 var(--sp-6);
   }
 
-  /* Hero: lado a lado */
+  .nav-logo {
+    /* En tablet+ dejamos el margen negativo un poco mayor */
+    margin-left: calc(-1 * var(--sp-2));
+  }
+
+  .nav-logo img {
+    height: 48px;
+  }
+
+  /* Hero lado a lado */
   #hero {
     flex-direction: row;
     align-items: center;
@@ -1125,7 +1188,7 @@ footer {
     gap: var(--sp-5);
   }
 
-  /* Footer: 3 columnas */
+  /* Footer 3 columnas */
   .footer-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: var(--sp-8);
@@ -1140,6 +1203,23 @@ footer {
 
 /* ── lg: 1024px ───────────────────────────────────────── */
 @media (min-width: 1024px) {
+  :root {
+    --icon-nav-sm: 22px;
+    --icon-nav-md: 30px;
+  }
+
+  .nav-inner {
+    padding: 0 var(--sp-8);
+  }
+
+  .nav-logo {
+    margin-left: calc(-1 * var(--sp-4));
+  }
+
+  .nav-logo img {
+    height: 52px;
+  }
+
   #hero {
     gap: var(--sp-12);
     margin: var(--sp-12) auto;
@@ -1164,10 +1244,24 @@ footer {
   .card-desc {
     font-size: var(--text-sm);
   }
+
+  .footer-col li img {
+    width: 17px;
+    height: 17px;
+  }
 }
 
 /* ── xl: 1200px ───────────────────────────────────────── */
 @media (min-width: 1200px) {
+  .nav-inner {
+    padding: 0 var(--sp-4);
+  }
+
+  .nav-logo {
+    /* En el max-width el padding del contenedor ya posiciona bien */
+    margin-left: 0;
+  }
+
   #hero {
     margin: var(--sp-16) auto;
   }
