@@ -36,7 +36,7 @@
   --clr-footer-rule: #1f3321;
 
   /* ── Tipografía ──────────────────────────────────────────── */
-  --font-display: 'Georgia', 'Times New Roman', serif;
+  --font-display: 'Segoe UI', system-ui, -apple-system, sans-serif;
   --font-body:    'Segoe UI', system-ui, -apple-system, sans-serif;
 
   /* ── Escala tipográfica (base mobile) ────────────────────── */
@@ -202,9 +202,6 @@ header {
   height: 40px;
   width: auto;
   object-fit: contain;
-  /* Invertir a blanco sobre fondo verde.
-     Si el logo ya tiene color propio sobre fondo transparente, quitá esta línea. */
-  filter: brightness(0) invert(1);
   /* Transición suave al hover */
   transition: opacity var(--transition);
 }

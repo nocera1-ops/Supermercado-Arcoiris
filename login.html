@@ -3,344 +3,724 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SuperMercado Express - Login & Registro</title>
-    <style>
-        :root {
-    /* Paleta de colores inspirada en un Arcoiris moderno y fresco */
-    --primary-color: #3a86ff;   /* Azul brillante para confianza */
-    --accent-red: #ff006e;      /* Rosa/Rojo para ofertas */
-    --accent-orange: #ff5a00;   /* Naranja para botones y carritos */
-    --accent-green: #38b000;    /* Verde para productos frescos/saludables */
-    --dark-color: #1a1d20;
-    --light-color: #f8f9fa;
-    --white: #ffffff;
+    <title>Supermercado Arcoiris Online - Login</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="style.css">
+<style>
+    /* ════════════════════════════════════════════════════════════
+   SUPERMERCADO ARCOIRIS S.A. — login.css
+   Layout: título con líneas + panel gris dos columnas
+   Mismo sistema de tokens que style.css
+════════════════════════════════════════════════════════════ */
+
+
+/* ══════════════════════════════════════════════════════════
+   1. TOKENS (idénticos a style.css)
+══════════════════════════════════════════════════════════ */
+:root {
+  --clr-green:        #2d7a3a;
+  --clr-green-dark:   #1e5628;
+  --clr-green-soft:   #e8f5eb;
+  --clr-green-border: #b2d8b8;
+  --clr-yellow:       #f5c518;
+  --clr-yellow-dark:  #d4a800;
+  --clr-dark:         #1a2a1c;
+  --clr-mid:          #4a5e4c;
+  --clr-light:        #f4f8f4;
+  --clr-white:        #ffffff;
+  --clr-border:       #d4e0d6;
+
+  --font-display: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-body:    'Segoe UI', system-ui, -apple-system, sans-serif;
+
+  --text-xs:   0.70rem;
+  --text-sm:   0.85rem;
+  --text-base: 1rem;
+  --text-lg:   1.15rem;
+  --text-xl:   1.35rem;
+  --text-2xl:  1.65rem;
+  --text-3xl:  2.1rem;
+
+  --sp-1:  0.25rem;
+  --sp-2:  0.5rem;
+  --sp-3:  0.75rem;
+  --sp-4:  1rem;
+  --sp-5:  1.25rem;
+  --sp-6:  1.5rem;
+  --sp-8:  2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
+
+  --radius-sm:   6px;
+  --radius:      10px;
+  --radius-lg:   16px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 4px rgba(0,0,0,.07);
+  --shadow:    0 2px 14px rgba(0,0,0,.09);
+  --shadow-lg: 0 6px 28px rgba(0,0,0,.13);
+
+  --transition: 0.2s ease;
+  --max-w: 1200px;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+
+/* ══════════════════════════════════════════════════════════
+   2. RESET
+══════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
-    /* Fondo sutil degradado con los tonos suaves del arcoiris */
-    background: linear-gradient(135deg, #e8f0fe 0%, #fef3e8 50%, #eafaf1 100%);
-    display: flex;
-    flex-direction: column; /* Permite que el header se coloque arriba del contenedor */
-    align-items: center;
-    min-height: 100vh;
-    padding: 0 20px 40px 20px;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  background: var(--clr-white);
+  color: var(--clr-dark);
+  line-height: 1.65;
+  min-height: 100dvh;
 }
 
-/* --- ESTILOS PARA TU HEADER DE CONTACTO --- */
-#contacto-header {
-    width: 100%;
-    max-width: 450px; /* Alineado exactamente con el ancho del formulario */
-    margin-top: 30px;
-    margin-bottom: 15px;
-    display: flex;
-    justify-content: flex-start;
+/* Bloquear scroll cuando el modal está abierto */
+body.modal-open { overflow: hidden; }
+
+a   { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+input { font-family: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--clr-yellow);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   3. ESTRUCTURA DE PÁGINA
+══════════════════════════════════════════════════════════ */
+.page-wrap {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--sp-6) var(--sp-4) var(--sp-12);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   4. BOTÓN VOLVER
+══════════════════════════════════════════════════════════ */
+.top-bar {
+  margin-bottom: var(--sp-6);
 }
 
 .btn-volver {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    color: #555;
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 8px 16px;
-    background-color: var(--white);
-    border-radius: 20px; /* Estilo píldora moderno */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    transition: all 0.2s ease;
-    border: 1px solid rgba(0,0,0,0.05);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  color: var(--clr-mid);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  padding: 0.4rem 1rem;
+  background: var(--clr-white);
+  border: 2px solid var(--clr-border);
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+  transition:
+    color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
 }
 
 .btn-volver:hover {
-    color: var(--primary-color);
-    transform: translateX(-3px); /* Efecto sutil de empuje hacia la izquierda */
-    box-shadow: 0 6px 15px rgba(58, 134, 255, 0.15);
+  color: var(--clr-green);
+  border-color: var(--clr-green);
+  box-shadow: 0 0 0 3px var(--clr-green-soft);
+  transform: translateX(-3px);
 }
 
-/* --- CONTENEDOR PRINCIPAL --- */
-.container {
-    background-color: var(--white);
-    border-radius: 20px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    width: 100%;
-    max-width: 450px;
-    padding: 2.5rem 2rem;
-    transition: all 0.3s ease;
-    border-top: 5px solid var(--primary-color); /* Detalle de color superior */
+
+/* ══════════════════════════════════════════════════════════
+   5. TÍTULO CON LÍNEAS DECORATIVAS
+   Réplica exacta de la captura: línea amarillo-dorada
+   a izquierda y derecha del texto
+══════════════════════════════════════════════════════════ */
+.page-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-8);
 }
 
-.header {
-    text-align: center;
-    margin-bottom: 2rem;
+/* Línea izquierda (corta, verde) */
+.page-title-wrap::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--clr-green);
+  flex-shrink: 0;
 }
 
-/* Estilo temático para el título Arcoiris */
-.header h1 {
-    font-size: 2.1rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    background: linear-gradient(45deg, var(--accent-red), var(--accent-orange), var(--primary-color), var(--accent-green));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    margin-bottom: 0.5rem;
+/* Línea derecha (larga, amarilla — ocupa el resto) */
+.page-title-wrap::after {
+  content: '';
+  display: block;
+  flex: 1;
+  height: 2px;
+  background: var(--clr-yellow);
 }
 
-.header p {
-    color: #666;
-    font-size: 0.9rem;
-    font-weight: 500;
+.page-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--clr-green);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-/* Selector de pestañas (Login / Registro) */
-.tabs {
-    display: flex;
-    background-color: var(--light-color);
-    padding: 6px;
-    border-radius: 12px;
-    margin-bottom: 2rem;
+
+/* ══════════════════════════════════════════════════════════
+   6. PANEL GRIS (contenedor de dos columnas)
+══════════════════════════════════════════════════════════ */
+.auth-panel {
+  background: var(--clr-light);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--clr-border);
+  display: flex;
+  flex-direction: column;    /* Mobile: apilado */
+  overflow: hidden;
 }
 
-.tab-btn {
-    flex: 1;
-    padding: 12px;
-    background: none;
-    border: none;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #777;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: all 0.2s ease;
+
+/* ── Columna izquierda: LOGIN ───────────────────────── */
+.auth-left {
+  padding: var(--sp-8) var(--sp-6);
+  flex: 1;
 }
 
-.tab-btn.active {
-    background-color: var(--white);
-    color: var(--primary-color);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+.auth-left-label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--clr-green);
+  margin-bottom: var(--sp-5);
 }
 
-/* Formularios e Inputs */
-.form-form {
-    display: none;
-    flex-direction: column;
-    gap: 1.2rem;
-}
-
-.form-form.active {
-    display: flex;
-}
-
+/* ── Inputs pill ─────────────────────────────────────── */
 .input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  margin-bottom: var(--sp-4);
 }
 
 .input-group label {
-    font-size: 0.85rem;
-    color: var(--dark-color);
-    font-weight: 700;
+  font-size: var(--text-sm);
+  color: var(--clr-mid);
+  font-weight: 500;
 }
 
 .input-group input {
-    padding: 14px;
-    border: 2px solid #e2e8f0;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    outline: none;
-    transition: all 0.2s ease;
+  width: 100%;
+  padding: 0.7rem var(--sp-5);
+  border: 1.5px solid var(--clr-border);
+  /* Pill: radio grande igual a la captura */
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  color: var(--clr-dark);
+  background: var(--clr-white);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition), box-shadow var(--transition);
 }
+
+.input-group input::placeholder { color: transparent; }
 
 .input-group input:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.15);
+  outline: none;
+  border-color: var(--clr-green);
+  box-shadow: 0 0 0 3px rgba(45,122,58,.12);
 }
 
-/* Opciones (Recordarme / Olvidé contraseña) */
-.form-options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.85rem;
+/* Olvidé mi contraseña */
+.forgot-link {
+  display: inline-block;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--clr-green);
+  margin-bottom: var(--sp-6);
+  transition: color var(--transition);
+  text-underline-offset: 3px;
 }
 
-.form-options a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-weight: 600;
+.forgot-link:hover {
+  color: var(--clr-green-dark);
+  text-decoration: underline;
 }
 
-.form-options a:hover {
-    text-decoration: underline;
+/* ── Botón ingresar (verde, con ícono) ───────────────── */
+.btn-ingresar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  width: 100%;
+  max-width: 340px;
+  padding: 0.85rem var(--sp-6);
+  background: var(--clr-green);
+  color: var(--clr-white);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 14px rgba(45,122,58,.25);
+  transition:
+    background var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
 }
 
+.btn-ingresar:hover {
+  background: var(--clr-green-dark);
+  box-shadow: 0 6px 20px rgba(30,86,40,.35);
+  transform: translateY(-2px);
+}
+
+.btn-ingresar:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ── Divisor vertical ────────────────────────────────── */
+.auth-divider {
+  /* Mobile: línea horizontal */
+  height: 1px;
+  background: var(--clr-border);
+  margin: 0 var(--sp-6);
+}
+
+/* ── Columna derecha: REGISTRO ───────────────────────── */
+.auth-right {
+  padding: var(--sp-8) var(--sp-6);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--sp-4);
+}
+
+.register-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--clr-yellow-dark);
+  line-height: 1.2;
+}
+
+.register-sub {
+  font-size: var(--text-sm);
+  color: var(--clr-mid);
+  max-width: 32ch;
+  line-height: 1.55;
+}
+
+/* Botón crear cuenta — amarillo, redondeado */
+.btn-crear {
+  padding: 0.75rem var(--sp-8);
+  background: var(--clr-yellow);
+  color: var(--clr-dark);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 14px rgba(245,197,24,.28);
+  transition:
+    background var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.btn-crear:hover {
+  background: var(--clr-yellow-dark);
+  box-shadow: 0 6px 20px rgba(212,168,0,.38);
+  transform: translateY(-2px);
+}
+
+.btn-crear:active {
+  transform: translateY(0);
+}
+
+
+/* ══════════════════════════════════════════════════════════
+   7. MODAL DE REGISTRO
+══════════════════════════════════════════════════════════ */
+.register-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.50);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-4);
+}
+
+.register-overlay.open {
+  display: flex;
+}
+
+.register-modal {
+  position: relative;
+  background: var(--clr-white);
+  border-radius: var(--radius-lg);
+  border-top: 4px solid var(--clr-green);
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 460px;
+  max-height: 90dvh;
+  overflow-y: auto;
+  padding: var(--sp-8) var(--sp-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--sp-4);
+  right: var(--sp-4);
+  font-size: 1.1rem;
+  color: var(--clr-mid);
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), color var(--transition);
+}
+
+.modal-close:hover {
+  background: var(--clr-light);
+  color: var(--clr-dark);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--clr-green);
+  font-weight: 700;
+}
+
+.modal-sub {
+  font-size: var(--text-sm);
+  color: var(--clr-mid);
+  margin-top: calc(-1 * var(--sp-2));
+}
+
+/* Dentro del modal: los inputs también son pill */
+.register-modal .input-group { margin-bottom: 0; }
+
+/* Checkbox términos */
 .checkbox-group {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-weight: 500;
-    color: #555;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  font-size: var(--text-xs);
+  color: var(--clr-mid);
+  line-height: 1.55;
 }
 
 .checkbox-group input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    accent-color: var(--primary-color); /* Color del check match con la marca */
-    cursor: pointer;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  accent-color: var(--clr-green);
+  cursor: pointer;
 }
 
-/* Botón de envío llamativo (Estilo Arcoiris) */
-.btn-submit {
-    background: linear-gradient(135deg, var(--accent-orange) 0%, #e04e00 100%);
-    color: var(--white);
-    border: none;
-    padding: 16px;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    box-shadow: 0 6px 15px rgba(255, 90, 0, 0.25);
-    transition: all 0.2s ease;
-    margin-top: 0.5rem;
+.checkbox-group a {
+  color: var(--clr-green);
+  font-weight: 700;
+  text-underline-offset: 3px;
+  transition: color var(--transition);
 }
 
-.btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 90, 0, 0.35);
+.checkbox-group a:hover {
+  color: var(--clr-green-dark);
+  text-decoration: underline;
 }
 
-.btn-submit:active {
-    transform: translateY(0);
+/* El btn-ingresar dentro del modal ocupa todo el ancho */
+.register-modal .btn-ingresar {
+  max-width: 100%;
 }
 
-/* Términos y condiciones */
-.terms {
-    font-size: 0.8rem;
-    color: #666;
-    line-height: 1.5;
+
+/* ══════════════════════════════════════════════════════════
+   8. BREAKPOINTS
+══════════════════════════════════════════════════════════ */
+
+/* md: 768px — activa el layout de dos columnas */
+@media (min-width: 768px) {
+  .auth-panel {
+    flex-direction: row;   /* Lado a lado */
+    align-items: stretch;
+  }
+
+  /* Divisor: ahora es vertical */
+  .auth-divider {
+    width: 1px;
+    height: auto;
+    margin: var(--sp-8) 0;
+    flex-shrink: 0;
+  }
+
+  .auth-left  { padding: var(--sp-10) var(--sp-10); }
+  .auth-right { padding: var(--sp-10) var(--sp-10); }
+
+  .page-title { font-size: var(--text-3xl); }
 }
 
-.terms a {
-    color: var(--primary-color);
-    font-weight: 600;
+/* lg: 1024px */
+@media (min-width: 1024px) {
+  .page-wrap {
+    padding: var(--sp-8) var(--sp-8) var(--sp-12);
+  }
+
+  .auth-left  { padding: var(--sp-12) var(--sp-12); }
+  .auth-right { padding: var(--sp-12) var(--sp-12); }
 }
-    </style>
+
+/* Reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
 </head>
 <body>
-    <header id="contacto-header">
-    <a href="index.html" class="btn-volver">&#8592; Volver</a>
+       <!-- ═══════════════════════════════ NAV ════════════════════════════════ -->
+  <header>
+    <nav id="main-nav" role="navigation" aria-label="Navegación principal">
+      <div class="nav-inner">
+
+        <a href="index.html" class="nav-logo" aria-label="Inicio — Supermercado Arcoiris">
+          <img src="img/logo.png" alt="logo de Supermercado Arcoiris Premium">
+        </a>
+
+        <form class="nav-search" role="search" id="search-form">
+          <label for="search-input" class="sr-only">Buscar productos</label>
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Buscar productos..."
+            autocomplete="off"
+            aria-label="Buscar productos"
+          />
+          <button type="submit" id="search-btn" aria-label="Realizar búsqueda"> <img src="img/lupa.svg" alt="icono lupa"> </button>
+        </form>
+
+
+          <div class="nav-actions">
+          <a href="login.html"> 
+            <button id="login-btn"> 
+              <img src="img/inicio-sesion.svg"> 
+             </button> 
+          </a>
+
+          <span id="cart-badge" aria-live="polite"></span>
+            <button id="cart-btn" aria-label="Abrir carrito">
+              <img src="img/carrito.svg"> 
+            </button>
+            </div>
+
+      </div>
+    </nav>
+
   </header>
 
-    <div class="container">
-        <div class="header">
-            <h1>SuperMercado <span>Express</span></h1>
-            <p id="header-subtitle">¡Haz tu súper sin salir de casa!</p>
-        </div>
+  <!-- ══════════════════════════════════════
+       PÁGINA COMPLETA
+  ═══════════════════════════════════════ -->
+  <div class="page-wrap">
 
-        <!-- Selector de pestañas -->
-        <div class="tabs">
-            <button class="tab-btn active" onclick="switchTab('login')">Iniciar Sesión</button>
-            <button class="tab-btn" onclick="switchTab('register')">Registrarse</button>
-        </div>
-
-        <!-- Formulario de Login -->
-        <form id="login-form" class="form-form active" onsubmit="handleSubmit(event, 'login')">
-            <div class="input-group">
-                <label for="login-email">Correo Electrónico</label>
-                <input type="email" id="login-email" placeholder="ejemplo@correo.com" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="login-password">Contraseña</label>
-                <input type="password" id="login-password" placeholder="Tu contraseña" required>
-            </div>
-
-            <div class="form-options">
-                <div class="checkbox-group">
-                    <input type="checkbox" id="remember-me">
-                    <label for="remember-me">Recordarme</label>
-                </div>
-                <a href="#">¿Olvidaste tu contraseña?</a>
-            </div>
-
-            <button type="submit" class="btn-submit">Entrar a mi Súper</button>
-        </form>
-
-        <!-- Formulario de Registro -->
-        <form id="register-form" class="form-form" onsubmit="handleSubmit(event, 'register')">
-            <div class="input-group">
-                <label for="reg-name">Nombre Completo</label>
-                <input type="text" id="reg-name" placeholder="Juan Pérez" required>
-            </div>
-
-            <div class="input-group">
-                <label for="reg-email">Correo Electrónico</label>
-                <input type="email" id="reg-email" placeholder="juan@correo.com" required>
-            </div>
-
-            <div class="input-group">
-                <label for="reg-phone">Teléfono / Celular (Para envíos)</label>
-                <input type="tel" id="reg-phone" placeholder="123456789" required>
-            </div>
-            
-            <div class="input-group">
-                <label for="reg-password">Contraseña</label>
-                <input type="password" id="reg-password" placeholder="Mínimo 6 caracteres" minlength="6" required>
-            </div>
-
-            <div class="checkbox-group terms">
-                <input type="checkbox" id="accept-terms" required>
-                <label for="accept-terms">Acepto los <a href="#">Términos y Condiciones</a> y el aviso de privacidad de entrega a domicilio.</label>
-            </div>
-
-            <button type="submit" class="btn-submit">Crear Cuenta y Comprar</button>
-        </form>
+    <!-- Título con líneas decorativas -->
+    <div class="page-title-wrap">
+      <h1 class="page-title">Iniciar Sesión</h1>
     </div>
 
-    <script>
-        function switchTab(tab) {
-            // Botones
-            const buttons = document.querySelectorAll('.tab-btn');
-            // Formularios
-            const loginForm = document.getElementById('login-form');
-            const registerForm = document.getElementById('register-form');
-            const subtitle = document.getElementById('header-subtitle');
+    <!-- Panel gris de dos columnas -->
+    <div class="auth-panel">
 
-            buttons.forEach(btn => btn.classList.remove('active'));
+      <!-- Columna izquierda: LOGIN -->
+      <div class="auth-left">
+        <p class="auth-left-label">Ingresá con tu email y clave</p>
 
-            if (tab === 'login') {
-                buttons[0].classList.add('active');
-                loginForm.classList.add('active');
-                registerForm.classList.remove('active');
-                subtitle.innerText = "¡Haz tu súper sin salir de casa!";
-            } else {
-                buttons[1].classList.add('active');
-                registerForm.classList.add('active');
-                loginForm.classList.remove('active');
-                subtitle.innerText = "Regístrate para llenar tu carrito";
-            }
-        }
+        <form id="login-form" onsubmit="handleLogin(event)">
+          <div class="input-group">
+            <label for="login-email">Email</label>
+            <input
+              type="email"
+              id="login-email"
+              placeholder=" "
+              autocomplete="email"
+              required
+            />
+          </div>
 
-        function handleSubmit(event, type) {
-            event.preventDefault();
-            
-            if (type === 'login') {
-                const email = document.getElementById('login-email').value;
-                alert(`¡Bienvenido de nuevo! Iniciando sesión con: ${email}.\n(Aquí conectarías con tu base de datos)`);
-            } else {
-                const name = document.getElementById('reg-name').value;
-                alert(`¡Gracias por registrarte, ${name}! Tu cuenta de Súper ha sido creada.\n(Aquí conectarías con tu base de datos)`);
-            }
-        }
-    </script>
+          <div class="input-group">
+            <label for="login-password">Contraseña</label>
+            <input
+              type="password"
+              id="login-password"
+              placeholder=" "
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+
+          <button type="submit" class="btn-ingresar">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            Ingresar a Arcoiris
+          </button>
+        </form>
+      </div>
+
+      <!-- Divisor vertical -->
+      <div class="auth-divider" aria-hidden="true"></div>
+
+      <!-- Columna derecha: REGISTRO -->
+      <div class="auth-right">
+        <h2 class="register-title">¿Sos nuevo en Arcoiris?</h2>
+        <p class="register-sub">
+          Registrate en nuestro sitio y descubrí todas las
+          oportunidades que tenemos para vos.
+        </p>
+        <button class="btn-crear" id="btn-abrir-registro">
+          Crear cuenta
+        </button>
+      </div>
+
+    </div><!-- /auth-panel -->
+
+
+    <!-- Modal / Formulario de registro (oculto por defecto) -->
+    <div id="register-overlay" class="register-overlay" aria-hidden="true">
+      <div class="register-modal" role="dialog" aria-modal="true" aria-label="Formulario de registro">
+
+        <button class="modal-close" id="btn-cerrar-registro" aria-label="Cerrar">✕</button>
+
+        <h2 class="modal-title">Crear cuenta</h2>
+        <p class="modal-sub">Completá tus datos y empezá a comprar</p>
+
+        <form id="register-form" onsubmit="handleRegister(event)">
+          <div class="input-group">
+            <label for="reg-name">Nombre completo</label>
+            <input type="text" id="reg-name" placeholder=" " required />
+          </div>
+
+          <div class="input-group">
+            <label for="reg-email">Email</label>
+            <input type="email" id="reg-email" placeholder=" " required />
+          </div>
+
+          <div class="input-group">
+            <label for="reg-phone">Teléfono (para envíos)</label>
+            <input type="tel" id="reg-phone" placeholder=" " required />
+          </div>
+
+          <div class="input-group">
+            <label for="reg-password">Contraseña</label>
+            <input type="password" id="reg-password" placeholder=" " minlength="6" required />
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="accept-terms" required />
+            <label for="accept-terms">
+              Acepto los <a href="#">Términos y Condiciones</a> y el aviso
+              de privacidad de entrega a domicilio.
+            </label>
+          </div>
+
+          <button type="submit" class="btn-ingresar">
+            Crear cuenta y comprar
+          </button>
+        </form>
+
+      </div>
+    </div><!-- /register-overlay -->
+
+  </div><!-- /page-wrap -->
+
+
+  <script>
+    /* ── Login ─────────────────────────────────────────── */
+    function handleLogin(e) {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      alert(`¡Bienvenido! Iniciando sesión con: ${email}`);
+    }
+
+    /* ── Registro ───────────────────────────────────────── */
+    function handleRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById('reg-name').value;
+      alert(`¡Gracias por registrarte, ${name}! Tu cuenta fue creada.`);
+      cerrarRegistro();
+    }
+
+    /* ── Modal abrir / cerrar ───────────────────────────── */
+    function abrirRegistro() {
+      const overlay = document.getElementById('register-overlay');
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+    }
+
+    function cerrarRegistro() {
+      const overlay = document.getElementById('register-overlay');
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    }
+
+    document.getElementById('btn-abrir-registro').addEventListener('click', abrirRegistro);
+    document.getElementById('btn-cerrar-registro').addEventListener('click', cerrarRegistro);
+
+    // Cerrar al hacer clic en el fondo oscuro
+    document.getElementById('register-overlay').addEventListener('click', function(e) {
+      if (e.target === this) cerrarRegistro();
+    });
+
+    // Cerrar con Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') cerrarRegistro();
+    });
+  </script>
+
 </body>
 </html>
