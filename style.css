@@ -1278,3 +1278,207 @@ footer {
     scroll-behavior: auto !important;
   }
 }
+
+/* ══════════════════════════════════════════════════════════
+   9. PÁGINA DE CONTACTO
+   Aplica cuando contacto.html usa style.css directamente.
+   El nav ya está cubierto arriba (secciones 3 y breakpoints).
+══════════════════════════════════════════════════════════ */
+ 
+/* ── Wrapper de la sección ───────────────────────────── */
+#contacto {
+  max-width: var(--max-w);
+  margin: var(--sp-10) auto var(--sp-16);
+  padding: 0 var(--sp-4);
+}
+ 
+/* ── Encabezado con líneas decorativas ───────────────── */
+/*
+  Mismo patrón que login.css:
+  línea corta verde a la izquierda · texto · línea larga amarilla
+*/
+.contact-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+ 
+.contact-inner > h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--clr-green);
+  /* Líneas decorativas con ::before / ::after en el h2 directamente */
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-4);
+  white-space: nowrap;
+}
+ 
+.contact-inner > h2::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--clr-green);
+  flex-shrink: 0;
+}
+ 
+.contact-inner > h2::after {
+  content: '';
+  display: block;
+  flex: 1;
+  height: 2px;
+  background: var(--clr-yellow);
+}
+ 
+.contact-inner > p {
+  color: var(--clr-mid);
+  font-size: var(--text-sm);
+  margin-bottom: var(--sp-8);
+  max-width: 56ch;
+}
+ 
+/* ── Formulario ──────────────────────────────────────── */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  background: var(--clr-light);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: var(--sp-8) var(--sp-6);
+}
+ 
+/* Fila de dos columnas (nombre + email) */
+.form-row {
+  display: flex;
+  flex-direction: column;   /* Mobile: apilado */
+  gap: var(--sp-4);
+}
+ 
+/* Labels */
+.contact-form label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--clr-dark);
+}
+ 
+/* Inputs, select y textarea */
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.65rem var(--sp-4);
+  border: 1.5px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-family: inherit;
+  color: var(--clr-dark);
+  background: var(--clr-white);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+ 
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #a0b4a4;
+}
+ 
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--clr-green);
+  box-shadow: 0 0 0 3px rgba(45, 122, 58, 0.12);
+}
+ 
+.contact-form select {
+  /* Flecha nativa del select — color acorde */
+  appearance: auto;
+  cursor: pointer;
+}
+ 
+.contact-form select option {
+  background: var(--clr-white);
+  color: var(--clr-dark);
+}
+ 
+.contact-form textarea {
+  resize: vertical;
+  min-height: 110px;
+  line-height: 1.6;
+}
+ 
+/* ── Botón enviar ────────────────────────────────────── */
+#contact-submit {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0.72rem var(--sp-8);
+  background: var(--clr-green);
+  color: var(--clr-white);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 14px rgba(45, 122, 58, 0.25);
+  transition:
+    background var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+ 
+#contact-submit:hover {
+  background: var(--clr-green-dark);
+  box-shadow: 0 6px 20px rgba(30, 86, 40, 0.35);
+  transform: translateY(-2px);
+}
+ 
+#contact-submit:active {
+  transform: translateY(0);
+}
+ 
+/* ── Mensaje de éxito ────────────────────────────────── */
+#form-success {
+  display: none;
+  background: var(--clr-green-soft);
+  border: 1px solid var(--clr-green-border);
+  color: var(--clr-green-dark);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+ 
+/* JS debe agregar display:block para mostrarlo */
+ 
+/* ── Breakpoints específicos del formulario ──────────── */
+@media (min-width: 640px) {
+  .form-row {
+    flex-direction: row;  /* Nombre y email lado a lado */
+  }
+ 
+  .form-row > label {
+    flex: 1;
+  }
+}
+ 
+@media (min-width: 768px) {
+  #contacto {
+    margin-top: var(--sp-12);
+  }
+ 
+  .contact-form {
+    padding: var(--sp-10) var(--sp-10);
+  }
+ 
+  .contact-inner > h2 {
+    font-size: var(--text-3xl);
+  }
+}

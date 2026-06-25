@@ -8,6 +8,46 @@
   <title>Formulario de contacto</title>
 </head>
 <body>
+
+ <header>
+    <nav id="main-nav" role="navigation" aria-label="Navegación principal">
+      <div class="nav-inner">
+
+        <a href="index.html" class="nav-logo" aria-label="Inicio — Supermercado Arcoiris">
+          <img src="img/logo.png" alt="logo de Supermercado Arcoiris Premium">
+        </a>
+
+        <form class="nav-search" role="search" id="search-form">
+          <label for="search-input" class="sr-only">Buscar productos</label>
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Buscar productos..."
+            autocomplete="off"
+            aria-label="Buscar productos"
+          />
+          <button type="submit" id="search-btn" aria-label="Realizar búsqueda"> <img src="img/lupa.svg" alt="icono lupa"> </button>
+        </form>
+
+
+          <div class="nav-actions">
+          <a href="login.html"> 
+            <button id="login-btn"> 
+              <img src="img/inicio-sesion.svg"> 
+             </button> 
+          </a>
+
+          <span id="cart-badge" aria-live="polite"></span>
+            <button id="cart-btn" aria-label="Abrir carrito">
+              <img src="img/carrito.svg"> 
+            </button>
+            </div>
+
+      </div>
+    </nav>
+
+  </header>
+
     <section id="contacto" aria-labelledby="contacto-title">
       <div class="contact-inner">
         <h2 id="contacto-title">Contacto y atención al cliente</h2>
