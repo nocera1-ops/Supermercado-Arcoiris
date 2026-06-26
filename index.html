@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="img/favicon.png">
-  <title>Supermercado Arcoiris Online</title>
+  <title>Supermercado Arcoiris</title>
 </head>
 <body>
 
@@ -14,7 +14,7 @@
     <nav id="main-nav" role="navigation" aria-label="Navegación principal">
       <div class="nav-inner">
 
-        <a href="#" class="nav-logo" aria-label="Inicio — Supermercado Arcoiris">
+        <a href="index.html" class="nav-logo" aria-label="Inicio — Supermercado Arcoiris">
           <img src="img/logo.png" alt="logo de Supermercado Arcoiris Premium">
         </a>
 
@@ -32,17 +32,17 @@
 
 
           <div class="nav-actions">
-          <a href="login.html"> 
-            <button id="login-btn"> 
-              <img src="img/inicio-sesion.svg"> 
-             </button> 
-          </a>
-
           <span id="cart-badge" aria-live="polite"></span>
-            <button id="cart-btn" aria-label="Abrir carrito">
-              <img src="img/carrito.svg"> 
+          <button id="cart-btn" aria-label="Abrir carrito">
+            <img src="img/carrito.svg">
+          </button>
+
+          <a href="login.html">
+            <button id="login-btn">
+              <img src="img/inicio-sesion.svg">
             </button>
-            </div>
+          </a>
+          </div>
 
       </div>
     </nav>
@@ -52,22 +52,30 @@
    <!-- ═══════════════════════════════ MAIN ════════════════════════════════ -->
   <main>
     <section id="hero" aria-labelledby="hero-title">
-      <div class="hero-img-wrap">
-        <img
-          src="https://images.squarespace-cdn.com/content/v1/5f08bf613b56aa7bb0306089/1602292410336-0W8MLZ4RJ6VJFYJ9LH1Q/Landing-Page-1.jpg"
-          alt="Interior luminoso del Supermercado Arcoiris con pasillos bien surtidos"
-          loading="eager"
-        />
+
+      <!-- Imagen de fondo -->
+      <img
+        class="hero-bg"
+        src="img/main.png"
+        alt="Interior luminoso del Supermercado Arcoiris con pasillos bien surtidos"
+        loading="eager"
+      />
+
+      <!-- Overlay degradado para dar contraste al texto -->
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <!-- Contenido editorial (lado derecho) -->
+      <div class="hero-content">
+        <h1 id="hero-title">
+         Tu supermercado
+          <span>a la puerta<br>de tu casa.</span>
+        </h1>
+
+        <p>Desde 1987, Supermercado Arcoiris es el lugar donde Santa Fe hace sus compras con confianza. Nacimos en el barrio y hoy somos 12 sucursales en toda la provincia.</p>
+        <br>
+        <p>Trabajamos directamente con productores locales para traerte alimentos frescos, precios justos y la atención personalizada que merecés.</p>
       </div>
-      <div class="hero-text">
-        <h1 id="hero-title">Tu supermercado<br /><span>a la puerta de tu casa.</span></h1>
-        <p>Desde <span class="resaltado">2001</span>, Supermercado Arcoiris es el lugar donde Santa Fe hace sus compras con confianza. 
-          Nacimos en la ciudad de Arroyo Seco y hoy somos <span class="resaltado> <a href="https://www.google.com/maps/search/Supermercados+Arcoiris/@-32.5893186,-61.1953506,9z?entry=ttu&g_ep=EgoyMDI2MDYyMy4wIKXMDSoASAFQAw%3D%3D ">12 sucursales </a> </span> en toda la provincia.</p>
-        <p>Trabajamos directamente con productores locales para traerte alimentos frescos, precios justos y la atención personalizada 
-          que merecés.</p>
-        <div class="hero-badges">
-          <span class="badge">🚚 Envios gratis (monto mínimo $30.000)</span>
-          <span class="badge">💳 Todos los medios de pago</span>
+
     </section>
 
        <!-- ═══════════════════════════════ CATALOGO ════════════════════════════════ -->
