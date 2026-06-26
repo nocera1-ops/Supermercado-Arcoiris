@@ -372,12 +372,10 @@ header {
   position: relative;
   width: 100%;
   /* Altura del banner: crece en pantallas grandes */
-  height: 62vw;
-  min-height: 320px;
-  max-height: 620px;
+  height: 36vw;
   overflow: hidden;
   /* Sin max-width: va de borde a borde */
-  background: #0e1a10;
+  background: #ffffff;
 }
 
 /* ── Imagen de fondo ─────────────────────────────────── */
@@ -389,24 +387,8 @@ header {
   /* La imagen ancla en el centro-izquierda
      para que el sujeto quede a la izquierda y el texto a la derecha */
   object-position: 30% center;
-}
-
-
-/* ── Overlay ─────────────────────────────────────────── */
-/*
-  Degradado horizontal: transparente en el lado de la imagen,
-  oscuro en el lado del texto — igual al estilo de la captura.
-*/
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(10, 26, 12, 0.10) 0%,
-    rgba(10, 26, 12, 0.30) 45%,
-    rgba(10, 26, 12, 0.72) 70%,
-    rgba(10, 26, 12, 0.82) 100%
-  );
+  padding-top: 1px;
+  background-color: var(--clr-green-mid);
 }
 
 /* ── Contenido editorial ─────────────────────────────── */
